@@ -14,7 +14,18 @@ class Reactions extends Component {
     };
   }
 
+  saveLike(e, status) {
+  
+    let data = {
+      id: 0,
+      status: status
+    };
  
+    console.log(JSON.stringify(data));
+ 
+    kafkaService.reaction("i-love-adsoftsito");
+    e.preventDefault();
+}
   
 
   handleLikeClick = () => {
