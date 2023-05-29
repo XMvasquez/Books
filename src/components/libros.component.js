@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TkdAppDataServices from "../services/libros.services";
+import TkdAppDataServices from "src/services/kafka.service.js";
 
 import Coments from "./coments.component";
 import Likes from "./likes.component"; 
