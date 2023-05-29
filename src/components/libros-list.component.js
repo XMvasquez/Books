@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import TkdAppDataServices from "../services/tkdapp.services"
+import TkdAppDataServices from "../services/libros.services"
 import Coments from "./coments.component";
 import Likes from "./likes.component"; 
-import Tkdapp from "./tkdapp.component"
 
 export default class TkdappList extends Component {
   constructor(props) {
@@ -63,15 +62,10 @@ export default class TkdappList extends Component {
     });
   }
   render() {
-    const { tkdapps: tkdapp, currentTkdapp } = this.state;
+    const { tkdapps: tkdapp } = this.state;
 
-    // Define el número de columnas y filas para el grid
-    const columns = 3;
-
-    // Establece los estilos para el grid y las imágenes
     const gridStyles = {
-      display: "grid",
-      gridTemplateColumns: `repeat(${columns}, 1fr)`,
+      display: "row",
       gap: "10px",
     };
     const imageStyles = {
@@ -85,9 +79,9 @@ export default class TkdappList extends Component {
 
     return (
       <div style={{margin: 15}}>
-        <h4>Poomsae feed</h4>
-        <div className="row" style={{ display: "flex", justifyContent: "space-between"}}>
-          <div className="col" style={{minWidth: '60%'}}>
+        <h4>Books feed</h4>
+        <div className="row" style={{ display: "flex", justifyContent: "space-between", alignContent:"center", alignItems:"center"}}>
+          <div className="col" style={{maxWidth: '30%',alignContent:"center",alignItems:"center"}}>
             <div style={gridStyles}>
               {tkdapp.map((tkdapp, index) => (
                 <div
@@ -95,22 +89,13 @@ export default class TkdappList extends Component {
                   style={{ gridColumn: `span ${1}`, gridRow: `span ${1}` }}
                   key={index}
                 >
-                  {tkdapp.file.includes("mp4") || tkdapp.file.includes("ogg") || tkdapp.file.includes("webm") ? (
-                    <video
-                      src={tkdapp.file}
-                      alt={tkdapp.title}
-                      style={imageStyles}
-                      onClick={() => this.setActiveTkdapp(tkdapp, index)}
-                    />
-      
-                  ) : (
+                  
                     <img
                       src={tkdapp.file}
                       alt={tkdapp.title}
                       style={imageStyles}
                       onClick={() => this.setActiveTkdapp(tkdapp, index)}
                     />
-                  )}<br/><br/>
                   <div key={index} className="tkdapp-item" style={{}}>
                     <Likes likes={tkdapp.likes} refreshList={this.refreshList} />
                     <Coments />
@@ -120,23 +105,7 @@ export default class TkdappList extends Component {
             </div>
           </div>
 
-          <div className="col" style={{backgroundColor: '#f0f0f0', padding:20, borderRadius: '20px'}}>
-            <div className="col-md-6" >
-              <div>
-                {currentTkdapp ? (
-                  <Tkdapp
-                    tkdapp={currentTkdapp}
-                    refreshList={this.refreshList}
-                  />
-                ) : (
-                    <div>
-                      <br />
-                      <p>Please click on a Poomsae...</p>
-                    </div>
-                  )}
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     );

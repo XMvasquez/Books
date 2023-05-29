@@ -1,14 +1,14 @@
 import firebase from "../firebase";
 
-const db = firebase.collection("/poomsae");
+const db = firebase.collection("/Libros");
 
 class tkdappDataService {
   getAll() {
     return db;
   }
 
-  create(poomsae) {
-    return db.add(poomsae);
+  create(libros) {
+    return db.add(libros);
   }
 
   update(id, value) {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TkdAppDataServices from "../services/tkdapp.services";
+import TkdAppDataServices from "../services/libros.services";
 
 import Coments from "./coments.component";
 import Likes from "./likes.component"; 
@@ -224,7 +224,7 @@ export default class Tkdapp extends Component {
         ) : (
           <div>
             <br />
-            <p>Please click on a Poomsae...</p>
+            <p>ck on Books...</p>
           </div>
         )}
       </div>

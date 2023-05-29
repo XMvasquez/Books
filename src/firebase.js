@@ -4,12 +4,12 @@ import "firebase/compat/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyApdYjs-MRjMRTsZ_otWveSI23UVmNNSpI",
-  authDomain: "tkdapp-33cb6.firebaseapp.com",
-  projectId: "tkdapp-33cb6",
-  storageBucket: "tkdapp-33cb6.appspot.com",
-  messagingSenderId: "788796213548",
-  appId: "1:788796213548:web:42d65c13f908c922b90489"
+  apiKey: "AIzaSyBsHhuJi2F3NpK6P8L51UdogjM993E_oE8",
+  authDomain: "libros-68e83.firebaseapp.com",
+  projectId: "libros-68e83",
+  storageBucket: "libros-68e83.appspot.com",
+  messagingSenderId: "368951495369",
+  appId: "1:368951495369:web:ac0858d01a3cd278ec9b18"
 };
 
 // Initialize Firebase
