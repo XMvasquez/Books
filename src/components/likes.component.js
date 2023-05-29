@@ -23,7 +23,7 @@ class Reactions extends Component {
  
     console.log(JSON.stringify(data));
  
-    kafkaService.reaction("i-love-adsoftsito");
+    kafkaService.test("i-love-adsoftsito");
     e.preventDefault();
 }
   
