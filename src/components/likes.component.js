@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import kafkaService from '../services/kakfa.service';
 
 class Reactions extends Component {
   constructor(props) {
