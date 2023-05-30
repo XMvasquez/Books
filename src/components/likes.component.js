@@ -1,23 +1,6 @@
 import React, { Component } from 'react';
 import kafkaService from '../services/kafka.service';
 
-
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-
-// Configurar CORS para permitir todas las solicitudes de cualquier origen
-app.use(cors());
-
-// Resto de la configuración del servidor...
-
-// Iniciar el servidor
-app.listen(3000, () => {
-  console.log('Servidor iniciado en el puerto 3000');
-});
-
-
 class Reactions extends Component {
   constructor(props) {
     super(props);
