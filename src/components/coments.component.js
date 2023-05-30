@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import kafkaService from '../services/kafka.service';
 
 class CommentBox extends Component {
   constructor(props) {
