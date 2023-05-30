@@ -23,7 +23,7 @@ class Reactions extends Component {
  
     console.log(JSON.stringify(data));
  
-    kafkaService.reaction("1",this.props.id,reactions);
+    kafkaService.reaction(this.props.email ,this.props.id,reactions);
     e.preventDefault();
 }
   
