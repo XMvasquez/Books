@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import kafkaService from '../services/kafka.service';
 
+
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+// Configurar CORS para permitir todas las solicitudes de cualquier origen
+app.use(cors());
+
+// Resto de la configuración del servidor...
+
+// Iniciar el servidor
+app.listen(3000, () => {
+  console.log('Servidor iniciado en el puerto 3000');
+});
+
+
 class Reactions extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +31,7 @@ class Reactions extends Component {
     };
   }
 
-  saveLike(e, status) {
+  saveLike(e, status, reactions) {
   
     let data = {
       id: 0,
@@ -23,7 +40,7 @@ class Reactions extends Component {
  
     console.log(JSON.stringify(data));
  
-    kafkaService.reaction("1","a","d");
+    kafkaService.reaction("1",this.props.id,reactions);
     e.preventDefault();
 }
   
@@ -60,7 +77,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleLikeClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1,"like");
         }}>
           <span role="img" aria-label="like">
             👍
@@ -70,7 +87,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleLoveClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1,"love");
         }}>
           <span role="img" aria-label="love">
             ❤️
@@ -80,7 +97,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleLaughClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1, "laugh");
         }}>
           <span role="img" aria-label="laugh">
             😂
@@ -90,7 +107,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleCryClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1, "cry");
         }}>
           <span role="img" aria-label="cry">
             😢
@@ -100,7 +117,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleWowClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1, "wow");
         }}>
           <span role="img" aria-label="wow">
             😮
@@ -110,7 +127,7 @@ class Reactions extends Component {
         <button className='reaccion' onClick={(e) => {
           this.handleAngryClick();
           e.preventDefault();
-          this.saveLike(e, 1);
+          this.saveLike(e, 1, "angry");
         }}>
           <span role="img" aria-label="angry">
             😠

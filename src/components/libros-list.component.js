@@ -97,7 +97,7 @@ export default class TkdappList extends Component {
                       onClick={() => this.setActiveTkdapp(tkdapp, index)}
                     />
                   <div key={index} className="tkdapp-item" style={{}}>
-                    <Likes likes={tkdapp.likes} refreshList={this.refreshList} />
+                    <Likes likes={tkdapp.likes} id={tkdapp.id}refreshList={this.refreshList} />
                     <Coments />
                   </div>
                 </div>
