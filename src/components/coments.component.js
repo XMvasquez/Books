@@ -20,6 +20,18 @@ class CommentBox extends Component {
       };
     });
     this.refs.commentForm.reset();
+    this.saveComment(1,comment);
+  }
+
+  saveComment = (status, comment) => {
+    let data = {
+      id: 0,
+      status: status
+    };
+ 
+    console.log(JSON.stringify(data));
+ 
+    KafkaService.comment(this.props.email, this.props.id, comment);
   }
 
   render() {
