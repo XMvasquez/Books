@@ -18,7 +18,7 @@ class CommentBox extends Component {
   fetchComments = async () => {
     const id = this.props.id;
     console.log("comentario ", id)
-    const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net/";
+    const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net//api/comments";
     
     try {
       const response = await axios.get(`${uri}/${id}`);

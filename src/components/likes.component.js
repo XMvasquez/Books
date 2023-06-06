@@ -25,7 +25,7 @@ class Reactions extends Component {
       
       const id = this.props.id;
       console.log("try ",id);
-      const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net/";
+      const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net//api/reactions";
       const responseLike = await axios.get(`${uri}/${id}/like`);
       const likeCount = responseLike.data ? responseLike.data.n : 0;
       const responseLove = await axios.get(`${uri}/${id}/love`);
