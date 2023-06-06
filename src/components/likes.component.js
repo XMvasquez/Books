@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import kafkaService from '../services/kafka.service';
+import axios from 'axios';
+
 
 class Reactions extends Component {
   constructor(props) {
@@ -13,6 +15,44 @@ class Reactions extends Component {
         angryCount: 0
     };
   }
+
+  componentDidMount() {
+    this.fetchReactions();
+  }
+
+  fetchReactions = async () => {
+    try {
+      
+      const id = this.props.id;
+      console.log("try ",id);
+      const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net/";
+      const responseLike = await axios.get(`${uri}/${id}/like`);
+      const likeCount = responseLike.data ? responseLike.data.n : 0;
+      const responseLove = await axios.get(`${uri}/${id}/love`);
+      const loveCount = responseLove.data ? responseLove.data.n : 0;
+      const responseLaugh = await axios.get(`${uri}/${id}/laugh`);
+      const laughCount = responseLaugh.data ? responseLaugh.data.n : 0;
+      const responseSad = await axios.get(`${uri}/${id}/cry`);
+      const sadCount = responseSad.data ? responseSad.data.n : 0;
+      const responseWow = await axios.get(`${uri}/${id}/wow`);
+      const wowCount = responseWow.data ? responseWow.data.n : 0;
+      const responseAngry = await axios.get(`${uri}/${id}/angry`);
+      const angryCount = responseAngry.data ? responseAngry.data.n : 0;
+
+      this.setState({
+        likes: {
+          like: likeCount,
+          love: loveCount,
+          laugh: laughCount,
+          cry: sadCount,
+          wow: wowCount,
+          angry: angryCount
+        }
+      });
+    } catch (error) {
+      console.log('Error al obtener las reacciones:', error);
+    }
+  };
 
   saveLike(e, status, reactions) {
   

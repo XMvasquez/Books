@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
 import kafkaService from '../services/kafka.service';
-
+import axios from 'axios';
 
 class CommentBox extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      comments: []
+      arraycomments: []
     };
   }
 
+  componentDidMount() {
+    this.fetchComments();
+  }
+  
+  fetchComments = async () => {
+    const id = this.props.id;
+    console.log("comentario ", id)
+    const uri = "https://mongoapi-service-xmvasquez.cloud.okteto.net/";
+    
+    try {
+      const response = await axios.get(`${uri}/${id}`);
+      const comentarios = response.data ? response.data : [];
+      this.setState({ arraycomments: comentarios });
+      console.log()
+    } catch (error) {
+      console.log('Error al obtener los comentarios:', error);
+    }
+  };
+
   handleSubmit = (event) => {
+    this.fetchComments();
     event.preventDefault();
     const comment = this.refs.comment.value.trim();
     if (!comment) {
@@ -18,27 +39,22 @@ class CommentBox extends Component {
     }
     this.setState((prevState) => {
       return {
-        comments: prevState.comments.concat(comment)
+        arraycomments: prevState.arraycomments.concat(comment)
       };
     });
     this.refs.commentForm.reset();
-    this.saveComment(1,comment);
+    // Llamar a la función saveComment para enviar el comentario
+    this.saveComment(comment);
+    this.fetchComments();
   }
-
-  saveComment = (status, comment) => {
-    let data = {
-      id: 0,
-      status: status
-    };
+  
+  saveComment = (comment) => {
  
-    console.log(JSON.stringify(data));
- 
-    kafkaService.comment(this.props.email, this.props.id, comment);
+    KafkaService.comment(this.props.email, this.props.id, comment);
+    this.fetchComments();
   }
-
   render() {
-    const { comments } = this.state;
-
+    const { arraycomments } = this.state;
     return (
       <div>
         <form ref="commentForm" onSubmit={this.handleSubmit}>
@@ -48,12 +64,15 @@ class CommentBox extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Enviar</button>
         </form>
-        {comments.length > 0 ?
-          <ul className="list-group list-group-flush">
-            {comments.map((comment, index) => (
-              <li key={index} className="list-group-item">{comment}</li>
-            ))}
-          </ul>
+        {arraycomments.length > 0 ?
+          <div className="list-group list-group-flush">
+            {arraycomments.map((comentario) => (
+          <div className="commentbox" key={comentario._id} style={{backgroundColor:'#cacaca', marginBottom:4, marginTop:4, padding:3, borderRadius: '0px 15px 15px 15px'}}>
+            <p style={{fontSize:13, fontWeight:'bold', marginBottom:0}}>{comentario.userid}</p>
+            <p style={{fontSize:14, marginLeft:4,marginBottom:0}}>{comentario.message}</p>
+          </div>
+        ))}
+          </div>
           :
           <p>Aun no hay comentarios</p>
         }
