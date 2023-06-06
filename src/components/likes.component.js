@@ -14,7 +14,8 @@ class ReactionsMenu extends Component {
         laugh: 0,
         cry: 0,
         wow:  0,
-        angry: 0
+        angry: 0,
+        break: 0,
       },
       isOpen: false
     };
@@ -43,6 +44,9 @@ class ReactionsMenu extends Component {
       const responseAngry = await axios.get(`${uri}/${id}/angry`);
       const angryCount = responseAngry.data ? responseAngry.data.n : 0;
 
+      const responseBreak = await axios.get(`${uri}/${id}/break`);
+      const breakCount = responseBreak.data ? responseBreak.data.n : 0;
+
       this.setState({
         likes: {
           like: likeCount,
@@ -50,7 +54,8 @@ class ReactionsMenu extends Component {
           laugh: laughCount,
           cry: sadCount,
           wow: wowCount,
-          angry: angryCount
+          angry: angryCount,
+          break: breakCount,
         }
       });
     } catch (error) {
@@ -101,7 +106,8 @@ class ReactionsMenu extends Component {
                     reaction === 'laugh' ? '\u{1F602}' :
                       reaction === 'cry' ? '\u{1F62D}' :
                         reaction === 'wow' ? '\u{1F62E}' :
-                          reaction === 'angry' ? '\u{1F620}' : null}
+                          reaction === 'angry' ? '\u{1F620}' : 
+                            reaction === 'break' ? '\u{1F494}' : null}
               </span>
               <span className="count">{likes[reaction]}</span>
             </button>
