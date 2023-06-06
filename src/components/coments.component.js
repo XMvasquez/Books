@@ -50,7 +50,7 @@ class CommentBox extends Component {
   
   saveComment = (comment) => {
  
-    KafkaService.comment(this.props.email, this.props.id, comment);
+    kafkaService.comment(this.props.email, this.props.id, comment);
     this.fetchComments();
   }
   render() {
